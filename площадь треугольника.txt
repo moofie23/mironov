@@ -1,0 +1,45 @@
+// 25 var
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+float per(float x, float y, float z)
+{
+    float res;
+    res = (x + y + z)/2;
+    res = sqrt(res*(res-x)*(res-y)*(res-z));
+    return res;
+}
+    void vivod(float s)
+{
+      cout <<"\n Площадь треугольника = " << s;
+    if(s>15)
+        cout <<"\n Площадь треугольника больше 15";
+    else
+        cout <<"\n Площадь треугольника меньше 15";
+}
+    void tmp(float& x, float& y)
+{
+    float time;
+    time = x;
+    x = y;
+    y = time;
+}
+int main() 
+{
+    float a, b, c, s;
+    cout << "\n Добро пожаловать";
+    cout << "\n a = "; 
+    cin >> a;
+    cout << "\n b = "; 
+    cin >> b;
+    cout << "\n c = "; 
+    cin >> c;
+    s= per(a, b, c);
+    vivod(s);
+    tmp(a, b);
+    cout << "\n a =" << a;
+    cout << "\n b =" << b;
+    
+    return 0;
+}
