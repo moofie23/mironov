@@ -6,6 +6,7 @@ using namespace std;
 int main() 
 {
     char a;
+    //Цикл для вывода латинского алфавита по его коду ASCII
     for (a = 65; a < 91; a++)
     {
         cout << a;
