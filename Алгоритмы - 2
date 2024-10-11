@@ -1,0 +1,23 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() 
+{
+   float a, b, c, x, ST, ZP;
+     cout << "Введите ST = ";
+     cin >> ST;
+     if ( ST < 5 )
+        {
+            ZP = 130;
+        }
+     else
+     {
+        if ( ST <= 15 )
+            ZP = 180;
+        else
+            ZP = 180+(ST-15)*10;
+     }
+     cout << ZP;
+    return 0;
+}
