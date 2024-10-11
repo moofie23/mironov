@@ -1,0 +1,15 @@
+//25.	Написать программу, печатающую все буквы латинского алфавита от A до Z.
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+int main() 
+{
+    char a;
+    for (a = 65; a < 91; a++)
+    {
+        cout << a;
+        cout << " ";
+    }
+    return 0;
+}
