@@ -8,12 +8,12 @@ int main()
 {
     int n = 3, i, j;
     int mas[n];
-   for (i=0; i<n; i++)
+   for (i=0; i<n; i++) //Цикл для записи массива
     {
         cout << "\n Введите значение ";
         cin >> mas[i];
     }
-    for(i = 0; i < n; i++)
+    for(i = 0; i < n; i++) //Цикл для сортировки вставками массива
 	{
 		j = i - 1;
 		while(j >= 0 && mas[j] > mas[j + 1])
@@ -22,7 +22,7 @@ int main()
 			j--;
 		}
 	}
-	for (i=0; i<n; i++)
+	for (i=0; i<n; i++) // Цикл для вывода массива
     {
         cout << mas[i];
     }
