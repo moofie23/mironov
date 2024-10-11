@@ -1,0 +1,53 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() 
+{
+   float a, b, c, x, y, r;
+     cout << "Введите a = ";
+     cin >> a;
+     cout << "Введите b = ";
+     cin >> b;
+     cout << "Введите c = ";
+     cin >> c;
+      cout << "Введите x = ";
+     cin >> x;
+      cout << "Введите y = ";
+     cin >> y;
+     if ( a <= b )
+        {
+            r = a;
+            a = b;
+            b = r;
+        }
+     if ( b <= c)
+         {
+            r = b;
+            b = c;
+            c = r;
+         }
+    if ( a <= b )
+        {
+            r = a;
+            a = b;
+            b = r;
+        }
+   if ( x <= y )
+        {
+            r = x;
+            x = y;
+            y = r;
+        }
+        if ( a < x and b < y)
+        {
+            cout << "Пройдет";
+        }
+        else
+        {
+            cout << "Не пройдет";
+        }
+    
+
+    return 0;
+}
