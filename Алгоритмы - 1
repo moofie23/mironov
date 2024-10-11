@@ -1,0 +1,36 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() 
+{
+   float a, b, c, x, y;
+     cout << "Введите a = ";
+     cin >> a;
+      cout << "Введите b = ";
+     cin >> b;
+     if ( a = 0 )
+        {
+            if ( b = 0 )
+            {
+                cout << "x - любое";
+            }
+            else
+            {
+                cout << "Решений нет";
+            }
+        }
+     else
+     {
+        c = b/a;
+        if ( a > 0)
+        {
+            cout << "x > c";
+        }
+        else
+        {
+            cout << "x < c";
+        }
+     }
+    return 0;
+}
