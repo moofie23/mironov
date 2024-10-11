@@ -1,0 +1,13 @@
+//Решить пример x - pow(10,sin (x)) + cos (x-y)
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+
+using namespace std;
+int main() 
+{
+    int a, x, y;
+    a = x - pow(10,sin (x)) + cos (x-y);
+    cout << a;
+    return 0;
+}
