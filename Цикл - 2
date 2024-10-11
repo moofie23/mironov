@@ -1,0 +1,23 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() 
+{
+   float a = 3, b = 4;
+      while (a != b)
+      {
+          if (a > b)
+          {
+             a = a-b;
+          }
+          else
+          {
+              b = b-a;
+          }
+      }
+      cout << "\n a = " << a;
+      cout << "\n b = "  << b;
+      
+    return 0;
+}
