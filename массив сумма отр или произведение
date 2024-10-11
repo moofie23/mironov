@@ -1,0 +1,36 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() 
+{
+    int i, j, n = 11, y = 0, a = 0, b = 1;
+    int X [n];
+    for (i = 1; i<n; i++)
+        {
+           cout << "Введите значение " << i << " ";
+           cin >> X[i];
+        }
+          for (i = 1; i<n; i++)
+        {
+            if (X[i] < 0)
+            {
+                a = a + X[i];
+                y = y + 1;
+            }
+            else 
+            {
+                b = b * X[i];
+            }
+        }
+            
+        if (y > 3)
+        {
+            cout << "Сумма отрицательных чисел = " << a;
+        }
+        else
+        {
+            cout << "Произведения положительных чисел = " << b;
+        }
+    return 0;
+}
