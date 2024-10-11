@@ -1,0 +1,27 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() 
+{
+   float a, b, c;
+     cout << "Введите a = ";
+     cin >> a;
+     cout << "Введите b = ";
+     cin >> b;
+     cout << "Введите c = ";
+     cin >> c;
+     if ( a > c )
+        {
+            cout << "Кошка не подходит";
+        }
+     else
+     {
+        if ( c <= b )
+            cout << "Кошка подходит";
+        else
+            cout << "Кошка не подходит";
+     }
+
+    return 0;
+}
