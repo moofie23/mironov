@@ -1,0 +1,27 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+
+int main() 
+{
+    int n = 5, i, x = 0;
+    int mas[n];
+    for (i=0; i<n; i++)
+    {
+        cout << "\n Введите значение (только числа от 0 до 9) " << i+1 << " элемента: ";
+        cin >> mas[i];
+        if (mas[i] < 0 || mas[i] > 9)
+        {
+            cout << "Введено недопустимое значение, введите новое ";
+            i--;
+        }
+        x = x + mas[i];
+    }
+        for (i=0; i<n; i++)
+    {
+        cout << mas[i] << "\n";
+    }
+    cout << x;
+    return 0;
+}
