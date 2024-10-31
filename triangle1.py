@@ -22,7 +22,7 @@ def vid():
     if a == b and b == c:
          Type = "Равносторонний"
          S = (pow(a,2)*math.sqrt(b))/4
-    elif a==b and b!=c and a!= c:
+    elif (a==b and b!=c and a!= c) or (b==c and b!=a) or (a==c and a!=c):
          Type = "Равнобедренный"
          S = (a*b)/2
     else:
