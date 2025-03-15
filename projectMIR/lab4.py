@@ -3,8 +3,6 @@ import os
 import win32com.client
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
-import pandas as pd
-
 
 class Ui_MainWindow(object):
 
