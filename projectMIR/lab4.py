@@ -13,7 +13,6 @@ class Ui_MainWindow(object):
         def back(self):
             QApplication.quit()
 
-        # Открытие окна и создание интерфейса
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(665, 276)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -70,7 +69,6 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # Привязка события кнопки "Получить"
         self.btn_take.clicked.connect(self.load_json_data)
 
     def retranslateUi(self, MainWindow):
@@ -101,57 +99,32 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "id"))
 
     def load_json_data(self):
-        # Открытие файла и загрузка данных
         options = QFileDialog.Options()
         filePath, _ = QFileDialog.getOpenFileName(None, "Выберите файл JSON", "", "JSON Files (*.json);;All Files (*)", options=options)
-        
-        if not filePath:
-            QMessageBox.warning(None, "Ошибка", "Не выбран файл JSON!")
-            return
-
-        try:
-            # Чтение и парсинг JSON данных
             with open(filePath, 'r', encoding='utf-8') as file:
                 json_data = json.load(file)
             
-            # Получаем данные, которые нужно заполнить в таблицу (пример)
             imdata = json_data.get("imdata", [])
             
-            # Очищаем таблицу перед выводом новых данных
             self.tableWidget.setRowCount(len(imdata))
 
-            # Заполняем таблицу данными
             for row_index, item in enumerate(imdata):
-                try:
                     dn = item["l1PhysIf"]["attributes"]["dn"]
                     mdix = item["l1PhysIf"]["attributes"].get("mdix", "")
                     modTs = item["l1PhysIf"]["attributes"].get("modTs", "")
                     usage = item["l1PhysIf"]["attributes"].get("usage", "")
                     id_ = item["l1PhysIf"]["attributes"].get("id", "")
 
-                    # Вставляем данные в таблицу
                     self.tableWidget.setItem(row_index, 0, QtWidgets.QTableWidgetItem(mdix))
                     self.tableWidget.setItem(row_index, 1, QtWidgets.QTableWidgetItem(modTs))
                     self.tableWidget.setItem(row_index, 2, QtWidgets.QTableWidgetItem(usage))
                     self.tableWidget.setItem(row_index, 3, QtWidgets.QTableWidgetItem(dn))
                     self.tableWidget.setItem(row_index, 4, QtWidgets.QTableWidgetItem(id_))
-                except KeyError as e:
-                    print(f"Ошибка при извлечении данных: {e}")
-
-        except Exception as e:
-            QMessageBox.warning(None, "Ошибка", f"Не удалось загрузить данные: {e}")
-            print(f"Ошибка при загрузке данных: {e}")
-
+                
     def clear_table(self):
-        # Очистить все данные в таблице
         row_count = self.tableWidget.rowCount()
         for row in range(row_count):
-            self.tableWidget.removeRow(0)  # Удаляем строки
-
-        # Если нужно полностью очистить все ячейки:
-        # self.tableWidget.clearContents()
-
-        print("Таблица очищена.")
+            self.tableWidget.removeRow(0)  
 
 if __name__ == "__main__":
     import sys
