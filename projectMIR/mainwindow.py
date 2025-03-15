@@ -138,7 +138,6 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # Привязываем обработчики событий
         self.pushButton.clicked.connect(self.calculate_speed)
         self.bchamp.clicked.connect(self.find_champion)
 
@@ -178,12 +177,10 @@ class Ui_MainWindow(object):
             self.lineeditspeedmiha.setText(f"{speed_miha:.2f}")
 
     def find_champion(self):
-        # скорости
         speed_andrey = float(self.lineeditspeedandrey.text())
         speed_egor = float(self.lineeditspeedegor.text())
         speed_miha = float(self.lineeditspeedmiha.text())
 
-        # pobeda
         if speed_andrey >= max(speed_andrey, speed_egor, speed_miha):
             self.linechamp.setText("Андрей")
         elif speed_egor >= max(speed_andrey, speed_egor, speed_miha):
