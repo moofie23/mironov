@@ -51,7 +51,6 @@ class Ui_MainWindow(object):
         self.btn_take.setText(_translate("MainWindow", "Получить"))
         self.btn_clear.setText(_translate("MainWindow", "Очистить"))
 
-        # Подключение кнопок к функциям
         self.btn_back.clicked.connect(self.back)
         self.btn_take.clicked.connect(self.fetch_news)
         self.btn_clear.clicked.connect(self.clear_table)
@@ -60,13 +59,10 @@ class Ui_MainWindow(object):
         QApplication.exit()
 
     def fetch_news(self):
-        url = 'https://francais.news-pravda.com/'
-        try:
-            r = requests.get(url)
-            r.raise_for_status()  # Проверка на ошибки HTTP
+            url = 'https://francais.news-pravda.com/'
+            r = requests.get(url) 
             soup = BeautifulSoup(r.text, 'html.parser')
 
-            # Ищем новости и время для основного блока
             news = soup.find_all('div', class_='news-item__title')
             time = soup.find_all('div', class_='news-item__time')
 
@@ -76,12 +72,9 @@ class Ui_MainWindow(object):
                 row_position = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(row_position)
 
-                self.tableWidget.setItem(row_position, 0, QtWidgets.QTableWidgetItem(str(i + 1)))  # Номер
-                self.tableWidget.setItem(row_position, 1, QtWidgets.QTableWidgetItem(news[i].text.strip()))  # Описание
-                self.tableWidget.setItem(row_position, 2, QtWidgets.QTableWidgetItem(time[i].text.strip()))  # Время
-
-        except requests.exceptions.RequestException as e:
-            QMessageBox.critical(None, 'Ошибка', f"Не удалось загрузить данные: {e}")
+                self.tableWidget.setItem(row_position, 0, QtWidgets.QTableWidgetItem(str(i + 1)))  
+                self.tableWidget.setItem(row_position, 1, QtWidgets.QTableWidgetItem(news[i].text.strip()))  
+                self.tableWidget.setItem(row_position, 2, QtWidgets.QTableWidgetItem(time[i].text.strip()))  
 
     def clear_table(self):
         self.tableWidget.setRowCount(0)
