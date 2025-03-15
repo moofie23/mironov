@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         
         if filePath:
             self.excel_file_path = filePath
-            self.lineEdit.setText(self.excel_file_path)  # Отображаем путь в textEdit
+            self.lineEdit.setText(self.excel_file_path) 
         else:
             QMessageBox.warning(None, "Ошибка", "Не выбран файл Excel!")
 
@@ -24,16 +24,6 @@ class Ui_MainWindow(object):
         options = QFileDialog.Options()
         filePath, _ = QFileDialog.getOpenFileName(None, "Выберите шаблон Word", "", "Файлы Word (*.docx);;Все файлы (*)", options=options)
         
-        if filePath:
-            # Убедимся, что путь правильный и нет лишних символов
-            self.word_file_path = urllib.parse.unquote(filePath)  # Декодируем путь, чтобы убрать кодировки, как %20 для пробела
-            
-            # Проверим наличие лишнего двойного слэша и исправим
-            self.word_file_path = self.word_file_path.replace("\\\\", "\\")  # Заменяем двойные слэши на один
-            self.lineEdit_2.setText(self.word_file_path)  # Отображаем путь в textEdit
-        else:
-            QMessageBox.warning(None, "Ошибка", "Не выбран файл шаблона Word!")
-
     def select_save_path(self):
         options = QFileDialog.Options()
         savePath, _ = QFileDialog.getSaveFileName(None, "Сохранить файл", "", "Word Files (*.docx);;All Files (*)", options=options)
@@ -44,35 +34,20 @@ class Ui_MainWindow(object):
             QMessageBox.warning(None, "Ошибка", "Не выбран путь для сохранения файла!")
 
     def create_file(self):
-        # Проверяем, выбраны ли все необходимые файлы и путь для сохранения
         if not hasattr(self, 'excel_file_path') or not hasattr(self, 'word_file_path') or not hasattr(self, 'save_file_path'):
             QMessageBox.warning(None, "Ошибка", "Не все файлы или путь для сохранения выбраны!")
             return
 
-        try:
-            # Чтение данных из Excel
             data = pd.read_excel(self.excel_file_path)
             print("Данные из Excel загружены:")
-            print(data.head())  # Выводим первые строки данных для отладки
+            print(data.head())  
 
-            # Убираем пробелы в названиях столбцов
-            data.columns = data.columns.str.strip()
-
-            # Проверка наличия необходимых столбцов в Excel
-            if 'Фамилия и имя' not in data.columns or 'Дата рождения' not in data.columns or 'Адрес' not in data.columns:
-                QMessageBox.warning(None, "Ошибка", "Не найдены необходимые столбцы в файле Excel!")
-                print("Не найдены необходимые столбцы в файле Excel!")
-                return
-
-            # Работа с документом Word через COM
             word = win32com.client.Dispatch("Word.Application")
-            word.Visible = False  # Не показывать приложение Word
+            word.Visible = False  
             document = word.Documents.Open(self.word_file_path)
             print("Документ Word открыт успешно.")
 
-            # Проходим по строкам данных Excel и заменяем в шаблоне Word
             for index, row in data.iterrows():
-                # Заменяем данные в Word шаблоне
                 for paragraph in document.Paragraphs:
                     if "{Фамилия и имя}" in paragraph.Range.Text:
                         paragraph.Range.Text = paragraph.Range.Text.replace("{Фамилия и имя}", str(row['Фамилия и имя']))
@@ -81,18 +56,12 @@ class Ui_MainWindow(object):
                     if "{Адрес}" in paragraph.Range.Text:
                         paragraph.Range.Text = paragraph.Range.Text.replace("{Адрес}", str(row['Адрес']))
 
-            # Сохраняем измененный документ
             document.SaveAs(self.save_file_path)
             print(f"Файл успешно сохранен: {self.save_file_path}")
             document.Close()
             word.Quit()
 
             QMessageBox.information(None, "Успех", f"Файл успешно создан: {self.save_file_path}")
-
-        except Exception as e:
-            # Обработка ошибок
-            print(f"Ошибка: {e}")
-            QMessageBox.warning(None, "Ошибка", f"Произошла ошибка при создании файла: {e}")
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -126,7 +95,6 @@ class Ui_MainWindow(object):
         self.lineEdit_3.setGeometry(QtCore.QRect(10, 200, 201, 20))
         self.lineEdit_3.setObjectName("lineEdit_3")
         
-        # Соединение кнопок с функциями
         self.btn1.clicked.connect(self.excel)
         self.btn2.clicked.connect(self.word)
         self.btn3.clicked.connect(self.create_file)
